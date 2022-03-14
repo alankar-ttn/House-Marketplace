@@ -1,9 +1,11 @@
 import { updateProfile } from "firebase/auth";
 import { doc, updateDoc } from "firebase/firestore";
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { auth, db } from "../config/Firebase";
+import arrowRight from "../assets/svg/keyboardArrowRightIcon.svg";
+import homeIcon from "../assets/svg/homeIcon.svg";
 
 const Profile = () => {
 	const [formData, setFormData] = useState({
@@ -23,22 +25,22 @@ const Profile = () => {
 	};
 
 	const onSubmit = async (e) => {
-        try {
-            if (auth.currentUser.displayName !== name) {
-                await updateProfile(auth.currentUser, {
-                    displayName: name
-                })
+		try {
+			if (auth.currentUser.displayName !== name) {
+				await updateProfile(auth.currentUser, {
+					displayName: name,
+				});
 
-                const userRef = doc(db, "users", auth.currentUser.uid)
-                await updateDoc(userRef, {
-                    name
-                })
-                toast.success("Profile updated successfully!")
-            }
-        } catch (err) {
-            toast.error("Could not update profile details")
-        }
-    };
+				const userRef = doc(db, "users", auth.currentUser.uid);
+				await updateDoc(userRef, {
+					name,
+				});
+				toast.success("Profile updated successfully!");
+			}
+		} catch (err) {
+			toast.error("Could not update profile details");
+		}
+	};
 
 	const onChange = (e) => {
 		setFormData((prevState) => ({
@@ -50,7 +52,7 @@ const Profile = () => {
 	return (
 		<div className="profile">
 			<header className="profileHeader">
-				<p className="pageHeader">My Header</p>
+				<p className="pageHeader">My Profile</p>
 				<button className="logOut" onClick={onLogout}>
 					Logout
 				</button>
@@ -96,6 +98,11 @@ const Profile = () => {
 						/>
 					</form>
 				</div>
+				<Link to={"/create-listing"} className="createListing">
+					<img src={homeIcon} alt="home" />
+					<p>Sell or Rent your home</p>
+					<img src={arrowRight} alt="arrow right" />
+				</Link>
 			</main>
 		</div>
 	);

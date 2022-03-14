@@ -759,7 +759,7 @@ button {
 .formInputSmall,
 .formInputFile {
   margin-right: 3rem;
-  padding: 0.9rem 0.7rem;
+  padding: 0.9rem 0.2rem;
   text-align: center;
 }
 
@@ -767,6 +767,10 @@ button {
   padding: 0.9rem 1rem;
   width: 90%;
   max-width: 326px;
+}
+
+.formLatLng {
+  display: flex;
 }
 
 .formInputAddress {
