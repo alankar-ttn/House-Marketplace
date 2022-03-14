@@ -1,7 +1,7 @@
 import { doc, getDoc } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import shareIcon from "../assets/svg/shareIcon.svg";
 import Spinner from "../components/Spinner";
 import { auth, db } from "../config/Firebase";
