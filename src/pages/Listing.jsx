@@ -5,6 +5,10 @@ import { Link, useParams } from "react-router-dom";
 import shareIcon from "../assets/svg/shareIcon.svg";
 import Spinner from "../components/Spinner";
 import { auth, db } from "../config/Firebase";
+import SwiperCore, { Navigation, Pagination, Scrollbar, A11y } from "swiper";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/swiper-bundle.css";
+SwiperCore.use([Navigation, Pagination, Scrollbar, A11y])
 
 const Listing = () => {
 	const [listing, setListing] = useState(null);
@@ -31,6 +35,20 @@ const Listing = () => {
 
 	return (
 		<main>
+			<Swiper slidesPerView={1} pagination={{ clickable: true }}>
+				{listing.imgUrls.map((url, index) => (
+					<SwiperSlide key={index}>
+						<div
+							style={{
+								background: `url(${listing.imgUrls[index]}) center no-repeat`,
+								backgroundSize: "cover",
+							}}
+							className="swiperSlideDiv"
+						></div>
+					</SwiperSlide>
+				))}
+			</Swiper>
+
 			<div
 				className="shareIconDiv"
 				onClick={() => {
